@@ -74,11 +74,11 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "@rollup/pluginutils": "^5.1.0",
     "esbuild": "^0.19.8",
     "unplugin": "^1.5.1"
   },
   "devDependencies": {
-    "@rollup/pluginutils": "^5.1.0",
     "@sxzz/eslint-config": "^3.7.5",
     "@sxzz/prettier-config": "^2.0.0",
     "@types/node": "^20.10.0",
