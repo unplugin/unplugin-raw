@@ -2,6 +2,8 @@
 
 [![Unit Test](https://github.com/sxzz/unplugin-raw/actions/workflows/unit-test.yml/badge.svg)](https://github.com/sxzz/unplugin-raw/actions/workflows/unit-test.yml)
 
+Transform file to a default-export string. It will be transformed to JavaScript, then a string.
+
 ## Installation
 
 ```bash
@@ -62,6 +64,14 @@ module.exports = {
 ```
 
 <br></details> -->
+
+## Usage
+
+```ts
+import text from './ts.ts?raw'
+import text2 from './js.js?raw'
+import text3 from './jsx.jsx?raw'
+```
 
 ## Sponsors
 

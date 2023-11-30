@@ -2,7 +2,7 @@
   "name": "unplugin-raw",
   "version": "0.0.0",
   "packageManager": "pnpm@8.11.0",
-  "description": "Import raw content",
+  "description": "Transform file to a default-export string.",
   "keywords": [
     "unplugin",
     "rollup",
