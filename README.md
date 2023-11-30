@@ -1,6 +1,6 @@
 # unplugin-raw [![npm](https://img.shields.io/npm/v/unplugin-raw.svg)](https://npmjs.com/package/unplugin-raw)
 
-[![Unit Test](https://github.com/sxzz/unplugin-raw/actions/workflows/unit-test.yml/badge.svg)](https://github.com/sxzz/unplugin-raw/actions/workflows/unit-test.yml)
+[![Unit Test](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml/badge.svg)](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml)
 
 Transform file to a default-export string. It will be transformed to JavaScript, then a string.
 
