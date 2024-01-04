@@ -3,13 +3,13 @@
 exports[`esbuild 1`] = `
 "(() => {
   // tests/fixtures/ts.ts?raw
-  var ts_default = 'export const msg = \\"hello ts\\";\\\\n';
+  var ts_default = 'export const msg = "hello ts";\\n';
 
   // tests/fixtures/js.js?raw
-  var js_default = 'export const msg = \\"hello js\\";\\\\n';
+  var js_default = 'export const msg = "hello js";\\n';
 
   // tests/fixtures/jsx.jsx?raw
-  var jsx_default = 'export const msg = /* @__PURE__ */ React.createElement(\\"div\\", null, \\"hello jsx\\");\\\\n';
+  var jsx_default = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
 
   // <stdin>
   console.log(ts_default, js_default, jsx_default);
@@ -18,11 +18,11 @@ exports[`esbuild 1`] = `
 `;
 
 exports[`rollup 1`] = `
-"var text = \\"export const msg = \\\\\\"hello ts\\\\\\";\\\\n\\";
+"var text = "export const msg = \\"hello ts\\";\\n";
 
-var text2 = \\"export const msg = \\\\\\"hello js\\\\\\";\\\\n\\";
+var text2 = "export const msg = \\"hello js\\";\\n";
 
-var text3 = \\"export const msg = /* @__PURE__ */ React.createElement(\\\\\\"div\\\\\\", null, \\\\\\"hello jsx\\\\\\");\\\\n\\";
+var text3 = "export const msg = /* @__PURE__ */ React.createElement(\\"div\\", null, \\"hello jsx\\");\\n";
 
 console.log(text, text2, text3);
 "
