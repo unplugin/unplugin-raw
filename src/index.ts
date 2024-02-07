@@ -20,11 +20,14 @@ export default createUnplugin<Options | undefined, false>(
 
       resolveId:
         meta.framework === 'rollup'
-          ? async function (this: PluginContext, id, importer) {
+          ? async function (this, id, importer) {
               if (!rawRE.test(id)) return
 
               const file = cleanUrl(id)
-              const resolved = await this.resolve(file, importer)
+              const resolved = await (this as PluginContext).resolve(
+                file,
+                importer,
+              )
               if (!resolved) return
 
               return id.replace(file, resolved.id)
