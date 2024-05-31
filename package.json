@@ -83,7 +83,7 @@
     "@sxzz/prettier-config": "^2.0.0",
     "@types/node": "^20.11.16",
     "bumpp": "^9.3.0",
-    "eslint": "^8.56.0",
+    "eslint": "^9.4.0",
     "prettier": "^3.2.5",
     "rollup": "^4.9.6",
     "tsup": "^8.0.1",
