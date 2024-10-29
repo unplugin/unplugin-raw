@@ -43,6 +43,10 @@
       "require": "./dist/rollup.js",
       "import": "./dist/rollup.mjs"
     },
+    "./rolldown": {
+      "require": "./dist/rolldown.js",
+      "import": "./dist/rolldown.mjs"
+    },
     "./esbuild": {
       "require": "./dist/esbuild.js",
       "import": "./dist/esbuild.mjs"
