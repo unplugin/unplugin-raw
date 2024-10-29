@@ -1,12 +1,12 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { createUnplugin } from 'unplugin'
+import { type UnpluginInstance, createUnplugin } from 'unplugin'
 import { createFilter } from '@rollup/pluginutils'
 import { type Options, resolveOptions } from './core/options'
 import type { PluginContext } from 'rollup'
 import type { Loader } from 'esbuild'
 
-export default createUnplugin<Options | undefined, false>(
+const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
   (rawOptions = {}, meta) => {
     const options = resolveOptions(rawOptions)
     const transformFilter = createFilter(
@@ -57,6 +57,7 @@ export default createUnplugin<Options | undefined, false>(
     }
   },
 )
+export default unplugin
 
 const rawRE = /[&?]raw(?:&|$)/
 const postfixRE = /[#?].*$/s
