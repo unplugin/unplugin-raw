@@ -1,6 +1,6 @@
 {
   "name": "unplugin-raw",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "packageManager": "pnpm@9.14.4",
   "description": "Transform file to a default-export string.",
   "type": "module",
