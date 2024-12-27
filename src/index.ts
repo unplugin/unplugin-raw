@@ -40,8 +40,9 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
         let contents = await readFile(file, 'utf-8')
         if (transformFilter(file)) {
           let transform: typeof import('esbuild').transform
-          if (meta.framework === 'esbuild') {
-            ;({ transform } = meta.build!.esbuild)
+          const nativeContext = this.getNativeBuildContext?.()
+          if (nativeContext?.framework === 'esbuild') {
+            ;({ transform } = nativeContext.build.esbuild)
           } else {
             transform = (await import('esbuild')).transform
           }
