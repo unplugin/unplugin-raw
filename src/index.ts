@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { type UnpluginInstance, createUnplugin } from 'unplugin'
 import { createFilter } from '@rollup/pluginutils'
-import { type Options, resolveOptions } from './core/options'
-import type { PluginContext } from 'rollup'
+import { createUnplugin, type UnpluginInstance } from 'unplugin'
+import { resolveOptions, type Options } from './core/options'
 import type { Loader } from 'esbuild'
+import type { PluginContext } from 'rollup'
 
 const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
   (rawOptions = {}, meta) => {

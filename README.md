@@ -68,9 +68,9 @@ module.exports = {
 ## Usage
 
 ```ts
-import text from './ts.ts?raw'
 import text2 from './js.js?raw'
 import text3 from './jsx.jsx?raw'
+import text from './ts.ts?raw'
 ```
 
 ## Sponsors

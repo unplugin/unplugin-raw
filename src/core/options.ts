@@ -1,5 +1,5 @@
-import type { TransformOptions } from 'esbuild'
 import type { FilterPattern } from '@rollup/pluginutils'
+import type { TransformOptions } from 'esbuild'
 
 export interface Options {
   /** @default 'pre' */
