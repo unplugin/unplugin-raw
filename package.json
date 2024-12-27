@@ -3,6 +3,7 @@
   "version": "0.2.3",
   "packageManager": "pnpm@9.14.4",
   "description": "Transform file to a default-export string.",
+  "type": "module",
   "keywords": [
     "unplugin",
     "rollup",
@@ -24,32 +25,36 @@
     "dist"
   ],
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "./vite": {
-      "require": "./dist/vite.js",
-      "import": "./dist/vite.mjs"
+      "require": "./dist/vite.cjs",
+      "import": "./dist/vite.js"
     },
     "./webpack": {
-      "require": "./dist/webpack.js",
-      "import": "./dist/webpack.mjs"
+      "require": "./dist/webpack.cjs",
+      "import": "./dist/webpack.js"
+    },
+    "./rspack": {
+      "require": "./dist/rspack.cjs",
+      "import": "./dist/rspack.js"
     },
     "./rollup": {
-      "require": "./dist/rollup.js",
-      "import": "./dist/rollup.mjs"
+      "require": "./dist/rollup.cjs",
+      "import": "./dist/rollup.js"
     },
     "./rolldown": {
-      "require": "./dist/rolldown.js",
-      "import": "./dist/rolldown.mjs"
+      "require": "./dist/rolldown.cjs",
+      "import": "./dist/rolldown.js"
     },
     "./esbuild": {
-      "require": "./dist/esbuild.js",
-      "import": "./dist/esbuild.mjs"
+      "require": "./dist/esbuild.cjs",
+      "import": "./dist/esbuild.js"
     },
     "./*": [
       "./*",
