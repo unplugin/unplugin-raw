@@ -68,9 +68,10 @@ module.exports = {
 ## Usage
 
 ```ts
-import text2 from './js.js?raw'
-import text3 from './jsx.jsx?raw'
-import text from './ts.ts?raw'
+import text from './js.js?raw'
+import text2 from './jsx.jsx?raw'
+import text3 from './ts.ts?raw'
+import text4 from './with.js' with { type: 'text' }
 ```
 
 ## Sponsors
