@@ -20,9 +20,16 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
 
       resolveId:
         meta.framework === 'rollup'
-          ? async function (this, id, importer) {
-              if (!rawRE.test(id)) return
+          ? async function (this, id, importer, opt) {
+              if ((opt as any)?.attributes?.type === 'text') {
+                if (id.includes('?')) {
+                  id += '&raw'
+                } else {
+                  id += '?raw'
+                }
+              }
 
+              if (!rawRE.test(id)) return
               const file = cleanUrl(id)
               const resolved = await (this as PluginContext).resolve(
                 file,
@@ -54,6 +61,15 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
           ).code
         }
         return `export default ${JSON.stringify(contents)}`
+      },
+      esbuild: {
+        setup(build) {
+          build.onLoad({ filter: /.*/ }, (args) => {
+            if (args.with.type === 'text') {
+              return { contents: 'export default "123"' }
+            }
+          })
+        },
       },
     }
   },

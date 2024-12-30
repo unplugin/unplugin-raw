@@ -10,7 +10,8 @@ const contents = `
 import text from "./ts.ts?raw"
 import text2 from "./js.js?raw"
 import text3 from "./jsx.jsx?raw"
-console.log(text, text2, text3)
+import text4 from "./with.js" with { type: "text" }
+console.log(text, text2, text3, text4)
 `
 
 test('esbuild', async () => {

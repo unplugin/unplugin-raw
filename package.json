@@ -85,7 +85,7 @@
   "dependencies": {
     "@rollup/pluginutils": "^5.1.4",
     "esbuild": "^0.24.2",
-    "unplugin": "^2.1.0"
+    "unplugin": "^2.1.2"
   },
   "devDependencies": {
     "@sxzz/eslint-config": "^4.5.1",

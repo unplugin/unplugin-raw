@@ -11,8 +11,11 @@ exports[`esbuild 1`] = `
   // tests/fixtures/jsx.jsx?raw
   var jsx_default = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
 
+  // tests/fixtures/with.js
+  var with_default = "123";
+
   // <stdin>
-  console.log(ts_default, js_default, jsx_default);
+  console.log(ts_default, js_default, jsx_default, with_default);
 })();
 "
 `;
@@ -24,6 +27,8 @@ var text2 = "export const msg = \\"hello js\\";\\n";
 
 var text3 = "export const msg = /* @__PURE__ */ React.createElement(\\"div\\", null, \\"hello jsx\\");\\n";
 
-console.log(text, text2, text3);
+var text4 = "export const msg = \\"hello with\\";\\n";
+
+console.log(text, text2, text3, text4);
 "
 `;
