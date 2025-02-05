@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
+import { createFilter } from 'unplugin-utils'
 import { resolveOptions, type Options } from './core/options'
 import type { Loader } from 'esbuild'
 import type { PluginContext } from 'rollup'
