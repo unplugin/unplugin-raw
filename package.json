@@ -35,10 +35,7 @@
     "./rollup": "./dist/rollup.js",
     "./rolldown": "./dist/rolldown.js",
     "./esbuild": "./dist/esbuild.js",
-    "./*": [
-      "./*",
-      "./*.d.ts"
-    ]
+    "./*": "./*"
   },
   "typesVersions": {
     "*": {
