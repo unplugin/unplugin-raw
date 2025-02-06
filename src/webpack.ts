@@ -1,3 +1,22 @@
-import unplugin from '.'
+/**
+ * This entry file is for webpack plugin.
+ *
+ * @module
+ */
 
-export default unplugin.webpack as typeof unplugin.webpack
+import unplugin from './index'
+
+/**
+ * Webpack plugin
+ *
+ * @example
+ * ```ts
+ * // webpack.config.js
+ * module.exports = {
+ *  plugins: [require('unplugin-raw/webpack')()],
+ * }
+ * ```
+ */
+const webpack = unplugin.webpack as typeof unplugin.webpack
+export default webpack
+export { webpack as 'module.exports' }
