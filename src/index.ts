@@ -41,26 +41,28 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
             }
           : undefined,
 
-      loadInclude: (id) => rawRE.test(id),
-      async load(id) {
-        const file = cleanUrl(id)
-        let contents = await readFile(file, 'utf-8')
-        if (transformFilter(file)) {
-          let transform: typeof import('esbuild').transform
-          const nativeContext = this.getNativeBuildContext?.()
-          if (nativeContext?.framework === 'esbuild') {
-            ;({ transform } = nativeContext.build.esbuild)
-          } else {
-            transform = (await import('esbuild')).transform
+      load: {
+        filter: { id: { include: rawRE } },
+        async handler(id) {
+          const file = cleanUrl(id)
+          let contents = await readFile(file, 'utf-8')
+          if (transformFilter(file)) {
+            let transform: typeof import('esbuild').transform
+            const nativeContext = this.getNativeBuildContext?.()
+            if (nativeContext?.framework === 'esbuild') {
+              ;({ transform } = nativeContext.build.esbuild)
+            } else {
+              transform = (await import('esbuild')).transform
+            }
+            contents = (
+              await transform(contents, {
+                loader: guessLoader(file),
+                ...options.transform.options,
+              })
+            ).code
           }
-          contents = (
-            await transform(contents, {
-              loader: guessLoader(file),
-              ...options.transform.options,
-            })
-          ).code
-        }
-        return `export default ${JSON.stringify(contents)}`
+          return `export default ${JSON.stringify(contents)}`
+        },
       },
       esbuild: {
         setup(build) {
