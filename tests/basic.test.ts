@@ -6,15 +6,16 @@ import Raw from '../src'
 
 const resolveDir = path.resolve(__dirname, 'fixtures')
 
-const contents = `
-import text from "./ts.ts?raw"
-import text2 from "./js.js?raw"
-import text3 from "./jsx.jsx?raw"
-import text4 from "./with.js" with { type: "text" }
-console.log(text, text2, text3, text4)
-`
-
 test('esbuild', async () => {
+  const contents = `
+  import text from "./ts.ts?raw"
+  import text2 from "./js.js?raw"
+  import text3 from "./jsx.jsx?raw"
+  import text4 from "./with.js" with { type: "text" }
+  import bytes1 from "./abc.txt" with { type: "bytes" }
+  console.log(text, text2, text3, text4, bytes1)
+  `
+
   const result = await build({
     stdin: {
       contents,
@@ -29,6 +30,13 @@ test('esbuild', async () => {
 })
 
 test('rollup', async () => {
+  const contents = `
+  import text from "./ts.ts?raw"
+  import text2 from "./js.js?raw"
+  import text3 from "./jsx.jsx?raw"
+  import text4 from "./with.js" with { type: "text" }
+  console.log(text, text2, text3, text4)
+  `
   const entryFile = path.resolve(resolveDir, 'main.js')
   const bundle = await rollup({
     input: [entryFile],

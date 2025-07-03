@@ -19,17 +19,16 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
       enforce: options.enforce,
 
       resolveId:
-        meta.framework === 'rollup'
+        meta.framework === 'rollup' || meta.framework === 'rolldown'
           ? async function (this, id, importer, opt) {
-              if ((opt as any)?.attributes?.type === 'text') {
-                if (id.includes('?')) {
-                  id += '&raw'
-                } else {
-                  id += '?raw'
-                }
+              const attributeType = (opt as any)?.attributes?.type
+              if (attributeType === 'text') {
+                id += `${id.includes('?') ? '&' : '?'}raw`
+              } else if (attributeType === 'bytes') {
+                id += `${id.includes('?') ? '&' : '?'}bytes`
               }
-
               if (!rawRE.test(id)) return
+
               const file = cleanUrl(id)
               const resolved = await (this as PluginContext).resolve(
                 file,
@@ -43,32 +42,39 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
 
       load: {
         filter: { id: { include: rawRE } },
-        handler(id) {
+        async handler(id) {
           const file = cleanUrl(id)
           const context = this.getNativeBuildContext?.()
           const transform =
             context?.framework === 'esbuild'
               ? context.build.esbuild.transform
               : undefined
-          return transformRaw(
+          const contents = await transformRaw(
             file,
             transformFilter,
+            false,
             options.transform.options,
             transform,
           )
+          return contents as string
         },
       },
       esbuild: {
         setup(build) {
           build.onLoad({ filter: /.*/ }, async (args) => {
-            if (args.with.type === 'text') {
+            const isBytes = args.with.type === 'bytes'
+            if (args.with.type === 'text' || isBytes) {
               const contents = await transformRaw(
                 args.path,
                 transformFilter,
+                isBytes,
                 options.transform.options,
                 build.esbuild.transform,
               )
-              return { contents, loader: 'js' }
+              return {
+                contents,
+                loader: typeof contents === 'string' ? 'js' : 'binary',
+              }
             }
           })
         },
@@ -79,6 +85,7 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
 export default unplugin
 
 const rawRE = /[&?]raw(?:&|$)/
+// const bytesRE = /[&?]bytes(?:&|$)/
 const postfixRE = /[#?].*$/s
 function cleanUrl(url: string) {
   return url.replace(postfixRE, '')
@@ -109,16 +116,17 @@ export function guessLoader(id: string): Loader {
 async function transformRaw(
   file: string,
   transformFilter: (id: string | unknown) => boolean,
+  isBytes: boolean,
   options: TransformOptions,
   transform?: typeof import('esbuild').transform,
 ) {
-  let contents = await readFile(file, 'utf-8')
+  let contents = await readFile(file, isBytes ? undefined : 'utf8')
 
-  if (transformFilter(file)) {
+  if (!isBytes && transformFilter(file)) {
     transform ||= (await import('esbuild')).transform
     contents = (
       await transform(contents, { loader: guessLoader(file), ...options })
     ).code
   }
-  return `export default ${JSON.stringify(contents)}`
+  return isBytes ? contents : `export default ${JSON.stringify(contents)}`
 }
