@@ -22,6 +22,7 @@ test('esbuild', async () => {
     },
     write: false,
     bundle: true,
+    format: 'esm',
     plugins: [Raw.esbuild()],
   })
   expect(result.outputFiles[0].text).matchSnapshot()

@@ -3,7 +3,7 @@ import path from 'node:path'
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
 import { createFilter } from 'unplugin-utils'
 import { resolveOptions, type Options } from './core/options'
-import type { Loader } from 'esbuild'
+import type { Loader, TransformOptions } from 'esbuild'
 import type { PluginContext } from 'rollup'
 
 const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
@@ -43,32 +43,32 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
 
       load: {
         filter: { id: { include: rawRE } },
-        async handler(id) {
+        handler(id) {
           const file = cleanUrl(id)
-          let contents = await readFile(file, 'utf-8')
-          if (transformFilter(file)) {
-            let transform: typeof import('esbuild').transform
-            const nativeContext = this.getNativeBuildContext?.()
-            if (nativeContext?.framework === 'esbuild') {
-              ;({ transform } = nativeContext.build.esbuild)
-            } else {
-              transform = (await import('esbuild')).transform
-            }
-            contents = (
-              await transform(contents, {
-                loader: guessLoader(file),
-                ...options.transform.options,
-              })
-            ).code
-          }
-          return `export default ${JSON.stringify(contents)}`
+          const context = this.getNativeBuildContext?.()
+          const transform =
+            context?.framework === 'esbuild'
+              ? context.build.esbuild.transform
+              : undefined
+          return transformRaw(
+            file,
+            transformFilter,
+            options.transform.options,
+            transform,
+          )
         },
       },
       esbuild: {
         setup(build) {
-          build.onLoad({ filter: /.*/ }, (args) => {
+          build.onLoad({ filter: /.*/ }, async (args) => {
             if (args.with.type === 'text') {
-              return { contents: 'export default "123"' }
+              const contents = await transformRaw(
+                args.path,
+                transformFilter,
+                options.transform.options,
+                build.esbuild.transform,
+              )
+              return { contents, loader: 'js' }
             }
           })
         },
@@ -104,4 +104,21 @@ const ExtToLoader: Record<string, Loader> = {
 
 export function guessLoader(id: string): Loader {
   return ExtToLoader[path.extname(id).toLowerCase()] || 'js'
+}
+
+async function transformRaw(
+  file: string,
+  transformFilter: (id: string | unknown) => boolean,
+  options: TransformOptions,
+  transform?: typeof import('esbuild').transform,
+) {
+  let contents = await readFile(file, 'utf-8')
+
+  if (transformFilter(file)) {
+    transform ||= (await import('esbuild')).transform
+    contents = (
+      await transform(contents, { loader: guessLoader(file), ...options })
+    ).code
+  }
+  return `export default ${JSON.stringify(contents)}`
 }

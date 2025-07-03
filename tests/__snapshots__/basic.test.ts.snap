@@ -1,22 +1,20 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`esbuild 1`] = `
-"(() => {
-  // tests/fixtures/ts.ts?raw
-  var ts_default = 'export const msg = "hello ts";\\n';
+"// tests/fixtures/ts.ts?raw
+var ts_default = 'export const msg = "hello ts";\\n';
 
-  // tests/fixtures/js.js?raw
-  var js_default = 'export const msg = "hello js";\\n';
+// tests/fixtures/js.js?raw
+var js_default = 'export const msg = "hello js";\\n';
 
-  // tests/fixtures/jsx.jsx?raw
-  var jsx_default = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
+// tests/fixtures/jsx.jsx?raw
+var jsx_default = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
 
-  // tests/fixtures/with.js
-  var with_default = "123";
+// tests/fixtures/with.js
+var with_default = 'export const msg = "hello with";\\n';
 
-  // <stdin>
-  console.log(ts_default, js_default, jsx_default, with_default);
-})();
+// <stdin>
+console.log(ts_default, js_default, jsx_default, with_default);
 "
 `;
 
