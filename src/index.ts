@@ -18,27 +18,26 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
       name: 'unplugin-raw',
       enforce: options.enforce,
 
-      resolveId:
-        meta.framework === 'rollup' || meta.framework === 'rolldown'
-          ? async function (this, id, importer, opt) {
-              const attributeType = (opt as any)?.attributes?.type
-              if (attributeType === 'text') {
-                id += `${id.includes('?') ? '&' : '?'}raw`
-              } else if (attributeType === 'bytes') {
-                id += `${id.includes('?') ? '&' : '?'}bytes`
-              }
-              if (!rawRE.test(id)) return
-
-              const file = cleanUrl(id)
-              const resolved = await (this as PluginContext).resolve(
-                file,
-                importer,
-              )
-              if (!resolved) return
-
-              return id.replace(file, resolved.id)
+      resolveId: ['rollup', 'rolldown', 'vite'].includes(meta.framework)
+        ? async function (this, id, importer, opt) {
+            const attributeType = (opt as any)?.attributes?.type
+            if (attributeType === 'text') {
+              id += `${id.includes('?') ? '&' : '?'}raw`
+            } else if (attributeType === 'bytes') {
+              id += `${id.includes('?') ? '&' : '?'}bytes`
             }
-          : undefined,
+            if (!rawRE.test(id)) return
+
+            const file = cleanUrl(id)
+            const resolved = await (this as PluginContext).resolve(
+              file,
+              importer,
+            )
+            if (!resolved) return
+
+            return id.replace(file, resolved.id)
+          }
+        : undefined,
 
       load: {
         filter: { id: { include: rawRE } },

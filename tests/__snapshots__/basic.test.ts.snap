@@ -49,3 +49,12 @@ var text4 = "export const msg = \\"hello with\\";\\n";
 console.log(text, text2, text3, text4);
 "
 `;
+
+exports[`vite 1`] = `
+"const text = 'export const msg = "hello ts";\\n';
+const text2 = 'export const msg = "hello js";\\n';
+const text3 = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
+const text4 = 'export const msg = "hello with";\\n';
+console.log(text, text2, text3, text4);
+"
+`;
