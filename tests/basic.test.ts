@@ -25,7 +25,11 @@ test('esbuild', async () => {
     write: false,
     bundle: true,
     format: 'esm',
-    plugins: [Raw.esbuild()],
+    plugins: [
+      Raw.esbuild({
+        transform: true,
+      }),
+    ],
   })
   expect(result.outputFiles[0].text).matchSnapshot()
 })
@@ -55,7 +59,12 @@ const rollupPlugin: Plugin = {
 test('rollup', async () => {
   const bundle = await rollup({
     input: [entryFile],
-    plugins: [Raw.rollup(), rollupPlugin],
+    plugins: [
+      Raw.rollup({
+        transform: true,
+      }),
+      rollupPlugin,
+    ],
   })
   const result = await bundle.generate({ format: 'esm' })
   expect(result.output[0].code).matchSnapshot()
@@ -64,7 +73,12 @@ test('rollup', async () => {
 test('vite', async () => {
   const output = await vite({
     root: resolveDir,
-    plugins: [Raw.vite(), rollupPlugin],
+    plugins: [
+      Raw.vite({
+        transform: true,
+      }),
+      rollupPlugin,
+    ],
     build: {
       rollupOptions: {
         input: [entryFile],

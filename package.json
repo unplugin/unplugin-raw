@@ -59,8 +59,15 @@
     "release": "bumpp && pnpm publish",
     "prepublishOnly": "pnpm run build"
   },
+  "peerDependencies": {
+    "esbuild": ">=0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "esbuild": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "esbuild": "^0.25.8",
     "unplugin": "^2.3.5",
     "unplugin-utils": "^0.2.4"
   },
@@ -69,6 +76,7 @@
     "@sxzz/prettier-config": "^2.2.3",
     "@types/node": "^24.1.0",
     "bumpp": "^10.2.2",
+    "esbuild": "^0.25.9",
     "eslint": "^9.32.0",
     "prettier": "^3.6.2",
     "rollup": "^4.46.2",

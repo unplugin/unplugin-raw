@@ -2,12 +2,14 @@
 
 [![Unit Test](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml/badge.svg)](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml)
 
-Transform file to a default-export string. It will be transformed to JavaScript, then a string.
+Transform file to a default-export string, and can be transformed by esbuild.
 
 ## Installation
 
 ```bash
 npm i -D unplugin-raw
+
+npm i -D esbuild # Optional, if you want to transform TypeScript to JavaScript
 ```
 
 <details>
@@ -39,6 +41,20 @@ export default {
 <br></details>
 
 <details>
+<summary>Rolldown</summary><br>
+
+```ts
+// rolldown.config.js
+import Raw from 'unplugin-raw/rolldown'
+
+export default {
+  plugins: [Raw()],
+}
+```
+
+<br></details>
+
+<details>
 <summary>esbuild</summary><br>
 
 ```ts
@@ -52,18 +68,28 @@ build({
 
 <br></details>
 
-<!-- <details>
-<summary>Webpack</summary><br>
+## Options
 
 ```ts
-// webpack.config.js
-module.exports = {
-  /* ... */
-  plugins: [require('unplugin-raw/webpack')()],
+export interface TransformOptions {
+  /** @default [/\.[cm]?[jt]sx?$/] */
+  include?: FilterPattern
+  /** @default [/node_modules/] */
+  exclude?: FilterPattern
+  /** @default {} */
+  options?: EsbuildTransformOptions
+}
+
+export interface Options {
+  /** @default 'pre' */
+  enforce?: 'pre' | 'post' | undefined
+  /**
+   * Transform
+   * @default false
+   */
+  transform?: TransformOptions | boolean
 }
 ```
-
-<br></details> -->
 
 ## Usage
 
