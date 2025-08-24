@@ -1,6 +1,8 @@
-# unplugin-raw [![npm](https://img.shields.io/npm/v/unplugin-raw.svg)](https://npmjs.com/package/unplugin-raw)
+# unplugin-raw
 
-[![Unit Test](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml/badge.svg)](https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml)
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![Unit Test][unit-test-src]][unit-test-href]
 
 Transform file to a default-export string, and can be transformed by esbuild.
 
@@ -110,4 +112,13 @@ import text4 from './with.js' with { type: 'text' }
 
 ## License
 
-[MIT](./LICENSE) License © 2023-PRESENT [三咲智子](https://github.com/sxzz)
+[MIT](./LICENSE) License © 2023-PRESENT [Kevin Deng](https://github.com/sxzz)
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/unplugin-raw.svg
+[npm-version-href]: https://npmjs.com/package/unplugin-raw
+[npm-downloads-src]: https://img.shields.io/npm/dm/unplugin-raw
+[npm-downloads-href]: https://www.npmcharts.com/compare/unplugin-raw?interval=30
+[unit-test-src]: https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml/badge.svg
+[unit-test-href]: https://github.com/unplugin/unplugin-raw/actions/workflows/unit-test.yml
