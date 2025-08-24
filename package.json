@@ -30,13 +30,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
+    "./api": "./dist/api.js",
+    "./esbuild": "./dist/esbuild.js",
+    "./rolldown": "./dist/rolldown.js",
+    "./rollup": "./dist/rollup.js",
+    "./rspack": "./dist/rspack.js",
     "./vite": "./dist/vite.js",
     "./webpack": "./dist/webpack.js",
-    "./rspack": "./dist/rspack.js",
-    "./rollup": "./dist/rollup.js",
-    "./rolldown": "./dist/rolldown.js",
-    "./esbuild": "./dist/esbuild.js",
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
@@ -56,7 +57,7 @@
     "dev": "tsdown --watch",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
