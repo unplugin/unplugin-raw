@@ -99,6 +99,8 @@ export interface Options {
 import text from './js.js?raw'
 import text2 from './jsx.jsx?raw'
 import text3 from './ts.ts?raw'
+
+// Import attributes (Rolldown doesn't support this syntax)
 import text4 from './with.js' with { type: 'text' }
 ```
 

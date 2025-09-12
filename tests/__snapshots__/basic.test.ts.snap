@@ -37,6 +37,25 @@ console.log(ts_default, js_default, jsx_default, with_default, abc_default);
 "
 `;
 
+exports[`rolldown 1`] = `
+"//#region tests/fixtures/ts.ts?raw
+var ts_default = "export const msg = \\"hello ts\\";\\n";
+
+//#endregion
+//#region tests/fixtures/js.js?raw
+var js_default = "export const msg = \\"hello js\\";\\n";
+
+//#endregion
+//#region tests/fixtures/jsx.jsx?raw
+var jsx_default = "export const msg = /* @__PURE__ */ React.createElement(\\"div\\", null, \\"hello jsx\\");\\n";
+
+//#endregion
+//#region tests/fixtures/main.js
+console.log(ts_default, js_default, jsx_default);
+
+//#endregion"
+`;
+
 exports[`rollup 1`] = `
 "var text = "export const msg = \\"hello ts\\";\\n";
 

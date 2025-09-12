@@ -80,6 +80,7 @@
     "esbuild": "^0.25.9",
     "eslint": "^9.33.0",
     "prettier": "^3.6.2",
+    "rolldown": "1.0.0-beta.37",
     "rollup": "^4.46.2",
     "tsdown": "^0.14.1",
     "typescript": "^5.9.2",
