@@ -1,7 +1,7 @@
 {
   "name": "unplugin-raw",
   "version": "0.6.1",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.16.1",
   "description": "Transform file to a default-export string.",
   "type": "module",
   "keywords": [
@@ -69,22 +69,22 @@
     }
   },
   "dependencies": {
-    "unplugin": "^2.3.5",
-    "unplugin-utils": "^0.2.5"
+    "unplugin": "^2.3.10",
+    "unplugin-utils": "^0.3.0"
   },
   "devDependencies": {
-    "@sxzz/eslint-config": "^7.1.2",
-    "@sxzz/prettier-config": "^2.2.3",
-    "@types/node": "^24.2.1",
+    "@sxzz/eslint-config": "^7.1.4",
+    "@sxzz/prettier-config": "^2.2.4",
+    "@types/node": "^24.5.0",
     "bumpp": "^10.2.3",
     "esbuild": "^0.25.9",
-    "eslint": "^9.33.0",
+    "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "rolldown": "1.0.0-beta.37",
-    "rollup": "^4.46.2",
-    "tsdown": "^0.14.1",
+    "rolldown": "1.0.0-beta.38",
+    "rollup": "^4.50.2",
+    "tsdown": "^0.15.1",
     "typescript": "^5.9.2",
-    "vite": "^7.1.2",
+    "vite": "^7.1.5",
     "vitest": "^3.2.4"
   },
   "engines": {
