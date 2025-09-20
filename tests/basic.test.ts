@@ -40,7 +40,8 @@ import text from "./ts.ts?raw"
 import text2 from "./js.js?raw"
 import text3 from "./jsx.jsx?raw"
 import text4 from "./with.js" with { type: "text" }
-console.log(text, text2, text3, text4)
+import bytes1 from "./abc.txt" with { type: "bytes" }
+console.log(text, text2, text3, text4, bytes1)
 `
 const entryFile = path.resolve(resolveDir, 'main.js')
 const rollupPlugin = (code: string): Plugin => ({

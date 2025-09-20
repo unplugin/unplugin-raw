@@ -65,7 +65,9 @@ var text3 = "export const msg = /* @__PURE__ */ React.createElement(\\"div\\", n
 
 var text4 = "export const msg = \\"hello with\\";\\n";
 
-console.log(text, text2, text3, text4);
+var bytes1 = new Uint8Array([97, 98, 99, 10]);
+
+console.log(text, text2, text3, text4, bytes1);
 "
 `;
 
@@ -74,6 +76,7 @@ exports[`vite 1`] = `
 const text2 = 'export const msg = "hello js";\\n';
 const text3 = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
 const text4 = 'export const msg = "hello with";\\n';
-console.log(text, text2, text3, text4);
+const bytes1 = new Uint8Array([97, 98, 99, 10]);
+console.log(text, text2, text3, text4, bytes1);
 "
 `;

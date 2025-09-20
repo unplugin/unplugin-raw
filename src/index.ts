@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer'
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
 import { createFilter } from 'unplugin-utils'
 import { resolveOptions, type Options } from './core/options'
@@ -5,6 +6,7 @@ import { transformRaw } from './core/transform'
 import type { PluginContext } from 'rollup'
 
 const rawRE = /[&?]raw(?:&|$)/
+const bytesRE = /[&?]bytes(?:&|$)/
 const postfixRE = /[#?].*$/s
 function cleanUrl(url: string) {
   return url.replace(postfixRE, '')
@@ -28,8 +30,9 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
               id += `${id.includes('?') ? '&' : '?'}raw`
             } else if (attributeType === 'bytes') {
               id += `${id.includes('?') ? '&' : '?'}bytes`
+            } else if (!rawRE.test(id) && !bytesRE.test(id)) {
+              return
             }
-            if (!rawRE.test(id)) return
 
             const file = cleanUrl(id)
             const resolved = await (this as PluginContext).resolve(
@@ -44,23 +47,28 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
 
       load: {
         filter: {
-          id: { include: rawRE },
+          id: { include: [rawRE, bytesRE] },
         },
         async handler(id) {
+          const isBytes = bytesRE.test(id)
           const file = cleanUrl(id)
           const context = this.getNativeBuildContext?.()
           const transform =
             context?.framework === 'esbuild'
               ? context.build.esbuild.transform
               : undefined
-          const contents = await transformRaw(
+          let contents = await transformRaw(
             file,
-            false,
+            isBytes,
             transform,
             transformFilter,
             options.transform ? options.transform.options : undefined,
           )
-          return contents as string
+          if (Buffer.isBuffer(contents)) {
+            contents = `export default new Uint8Array([${contents.join(', ')}])`
+          }
+
+          return contents
         },
       },
 
