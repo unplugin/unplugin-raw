@@ -1,4 +1,3 @@
-import { Buffer } from 'node:buffer'
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
 import { createFilter } from 'unplugin-utils'
 import { resolveOptions, type Options } from './core/options'
@@ -50,7 +49,6 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
           id: { include: [rawRE, bytesRE] },
         },
         async handler(id) {
-          const isBytes = bytesRE.test(id)
           const file = cleanUrl(id)
           const context = this.getNativeBuildContext?.()
           const transform =
@@ -59,12 +57,12 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
               : undefined
           let contents = await transformRaw(
             file,
-            isBytes,
+            bytesRE.test(id) ? 'bytes' : 'text',
             transform,
             transformFilter,
             options.transform ? options.transform.options : undefined,
           )
-          if (Buffer.isBuffer(contents)) {
+          if (typeof contents !== 'string') {
             contents = `export default new Uint8Array([${contents.join(', ')}])`
           }
 
@@ -75,11 +73,11 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
       esbuild: {
         setup(build) {
           build.onLoad({ filter: /.*/ }, async (args) => {
-            const isBytes = args.with.type === 'bytes'
-            if (args.with.type === 'text' || isBytes) {
+            const type = args.with.type
+            if (type === 'text' || type === 'bytes') {
               const contents = await transformRaw(
                 args.path,
-                isBytes,
+                type,
                 build.esbuild.transform,
                 transformFilter,
                 options.transform ? options.transform.options : undefined,
