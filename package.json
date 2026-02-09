@@ -79,7 +79,7 @@
     "@types/node": "^25.0.3",
     "bumpp": "^10.3.2",
     "esbuild": "^0.27.2",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "prettier": "^3.7.4",
     "rolldown": "^1.0.0-beta.58",
     "rollup": "^4.54.0",
