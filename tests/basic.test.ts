@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { build as esbuild } from 'esbuild'
-import { rolldown } from 'rolldown'
-import { rollup, type Plugin, type RollupOutput } from 'rollup'
+import { build as rolldown, type RolldownOutput } from 'rolldown'
+import { rollup, type Plugin } from 'rollup'
 import { build as vite } from 'vite'
 import { expect, test } from 'vitest'
 import Raw from '../src'
@@ -80,7 +80,7 @@ console.log(text, text2, text3)
 `
 
 test('vite', async () => {
-  const output = await vite({
+  const output = (await vite({
     root: resolveDir,
     plugins: [
       Raw.vite({
@@ -91,17 +91,20 @@ test('vite', async () => {
     build: {
       rollupOptions: {
         input: [entryFile],
+        output: {
+          minify: false,
+        },
       },
       minify: false,
       write: false,
     },
     logLevel: 'silent',
-  })
-  expect((output as RollupOutput).output[0].code).matchSnapshot()
+  })) as RolldownOutput
+  expect(output.output[0].code).matchSnapshot()
 })
 
 test('rolldown', async () => {
-  const bundle = await rolldown({
+  const { output } = await rolldown({
     input: [entryFile],
     plugins: [
       Raw.rolldown({
@@ -109,7 +112,9 @@ test('rolldown', async () => {
       }),
       rollupPlugin(rolldownCode),
     ],
+    output: {
+      minify: false,
+    },
   })
-  const result = await bundle.generate({ format: 'esm' })
-  expect(result.output[0].code).matchSnapshot()
+  expect(output[0].code).matchSnapshot()
 })

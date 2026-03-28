@@ -56,9 +56,20 @@ console.log(text, text2, text3, text4, bytes1);
 `;
 
 exports[`vite 1`] = `
-"const text = 'export const msg = "hello ts";\\n';
-const text2 = 'export const msg = "hello js";\\n';
-const text3 = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
-console.log(text, text2, text3);
-"
+"//#region tests/fixtures/ts.ts?raw
+var ts_default = "export const msg = \\"hello ts\\";\\n";
+
+//#endregion
+//#region tests/fixtures/js.js?raw
+var js_default = "export const msg = \\"hello js\\";\\n";
+
+//#endregion
+//#region tests/fixtures/jsx.jsx?raw
+var jsx_default = "export const msg = /* @__PURE__ */ React.createElement(\\"div\\", null, \\"hello jsx\\");\\n";
+
+//#endregion
+//#region tests/fixtures/main.js
+console.log(ts_default, js_default, jsx_default);
+
+//#endregion"
 `;
