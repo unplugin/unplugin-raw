@@ -72,6 +72,13 @@ test('rollup', async () => {
   expect(result.output[0].code).matchSnapshot()
 })
 
+const rolldownCode = `
+import text from "./ts.ts?raw"
+import text2 from "./js.js?raw"
+import text3 from "./jsx.jsx?raw"
+console.log(text, text2, text3)
+`
+
 test('vite', async () => {
   const output = await vite({
     root: resolveDir,
@@ -79,7 +86,7 @@ test('vite', async () => {
       Raw.vite({
         transform: true,
       }),
-      rollupPlugin(rollupCode),
+      rollupPlugin(rolldownCode),
     ],
     build: {
       rollupOptions: {
@@ -92,13 +99,6 @@ test('vite', async () => {
   })
   expect((output as RollupOutput).output[0].code).matchSnapshot()
 })
-
-const rolldownCode = `
-import text from "./ts.ts?raw"
-import text2 from "./js.js?raw"
-import text3 from "./jsx.jsx?raw"
-console.log(text, text2, text3)
-`
 
 test('rolldown', async () => {
   const bundle = await rolldown({

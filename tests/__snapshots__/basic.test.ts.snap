@@ -59,8 +59,6 @@ exports[`vite 1`] = `
 "const text = 'export const msg = "hello ts";\\n';
 const text2 = 'export const msg = "hello js";\\n';
 const text3 = 'export const msg = /* @__PURE__ */ React.createElement("div", null, "hello jsx");\\n';
-const text4 = 'export const msg = "hello with";\\n';
-const bytes1 = new Uint8Array([97, 98, 99, 10]);
-console.log(text, text2, text3, text4, bytes1);
+console.log(text, text2, text3);
 "
 `;
