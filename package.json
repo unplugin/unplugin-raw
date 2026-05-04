@@ -65,7 +65,7 @@
     "unplugin-utils": "^0.3.1"
   },
   "devDependencies": {
-    "@sxzz/eslint-config": "^7.8.4",
+    "@sxzz/eslint-config": "^8.0.0",
     "@sxzz/prettier-config": "^2.3.1",
     "@types/node": "^25.5.0",
     "@typescript/native-preview": "7.0.0-dev.20260328.1",
