@@ -1,7 +1,7 @@
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
 import { createFilter } from 'unplugin-utils'
-import { resolveOptions, type Options } from './core/options'
-import { transformRaw } from './core/transform'
+import { resolveOptions, type Options } from './core/options.ts'
+import { transformRaw } from './core/transform.ts'
 import type { PluginContext } from 'rollup'
 
 const rawRE = /[&?]raw(?:&|$)/

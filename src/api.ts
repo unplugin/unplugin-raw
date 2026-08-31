@@ -3,5 +3,5 @@ export {
   type Options,
   type OptionsResolved,
   type TransformOptions,
-} from './core/options'
-export { transformRaw } from './core/transform'
+} from './core/options.ts'
+export { transformRaw } from './core/transform.ts'

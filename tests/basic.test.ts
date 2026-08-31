@@ -4,7 +4,7 @@ import { build as rolldown, type RolldownOutput } from 'rolldown'
 import { rollup, type Plugin } from 'rollup'
 import { build as vite } from 'vite'
 import { expect, test } from 'vitest'
-import Raw from '../src'
+import Raw from '../src/index.ts'
 
 const resolveDir = path.resolve(__dirname, 'fixtures')
 

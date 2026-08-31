@@ -1,10 +1,10 @@
 /**
- * This entry file is for rspack plugin.
+ * This entry file is for Rspack plugin.
  *
  * @module
  */
 
-import unplugin from './index'
+import unplugin from './index.ts'
 
 /**
  * Rspack plugin
