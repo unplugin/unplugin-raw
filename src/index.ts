@@ -50,6 +50,7 @@ const unplugin: UnpluginInstance<Options | undefined, false> = createUnplugin(
         },
         async handler(id) {
           const file = cleanUrl(id)
+          this.addWatchFile(file)
           const context = this.getNativeBuildContext?.()
           const transform =
             context?.framework === 'esbuild'
