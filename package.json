@@ -2,7 +2,7 @@
   "name": "unplugin-raw",
   "type": "module",
   "version": "0.7.0",
-  "packageManager": "pnpm@11.1.0",
+  "packageManager": "pnpm@12.1.0",
   "description": "Transform file to a default-export string.",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
-    "typecheck": "tsgo --noEmit",
+    "typecheck": "tsc --noEmit",
     "release": "bumpp",
     "prepublishOnly": "pnpm run build"
   },
@@ -61,25 +61,25 @@
     }
   },
   "dependencies": {
-    "unplugin": "^3.0.0",
-    "unplugin-utils": "^0.3.1"
+    "unplugin": "^3.3.0",
+    "unplugin-utils": "^0.3.2"
   },
   "devDependencies": {
-    "@sxzz/eslint-config": "^8.0.0",
-    "@sxzz/prettier-config": "^2.3.1",
-    "@types/node": "^25.5.0",
-    "@typescript/native-preview": "7.0.0-dev.20260328.1",
-    "bumpp": "^11.0.1",
-    "esbuild": "^0.27.4",
-    "eslint": "^10.1.0",
-    "prettier": "^3.8.1",
-    "rolldown": "^1.0.0-rc.12",
-    "rollup": "^4.60.0",
-    "tsdown": "^0.21.7",
-    "tsdown-preset-sxzz": "^0.5.0",
+    "@sxzz/eslint-config": "^8.5.0",
+    "@sxzz/prettier-config": "^2.3.2",
+    "@types/node": "^26.4.0",
+    "@typescript/native-preview": "npm:typescript@^7.0.2",
+    "bumpp": "^12.2.2",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.9.1",
+    "prettier": "^3.9.6",
+    "rolldown": "^1.2.6",
+    "rollup": "^4.63.1",
+    "tsdown": "^0.22.14",
+    "tsdown-preset-sxzz": "^0.7.0",
     "typescript": "^6.0.2",
-    "vite": "^8.0.3",
-    "vitest": "^4.1.2"
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
   },
   "prettier": "@sxzz/prettier-config"
 }

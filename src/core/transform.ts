@@ -10,7 +10,7 @@ export async function transformRaw(
   transformFilter?: (id: string | unknown) => boolean,
   options?: TransformOptions,
 ): Promise<string | Buffer> {
-  let contents = await readFile(file, type === 'text' ? 'utf8' : undefined)
+  let contents = await readFile(file, type === 'text' ? 'utf8' : null)
 
   if (type === 'text' && transformFilter?.(file)) {
     transform ||= (await import('esbuild')).transform
