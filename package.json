@@ -2,7 +2,13 @@
   "name": "unplugin-raw",
   "type": "module",
   "version": "0.8.0",
-  "packageManager": "pnpm@12.1.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.5.0",
+      "onFail": "download"
+    }
+  },
   "description": "Transform file to a default-export string.",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
